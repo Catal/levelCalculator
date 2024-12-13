@@ -9,24 +9,14 @@ body {
 }
 .container {
     display: grid;
-    grid-template-columns: 200px 1000px; /* 列の幅を固定 */
-    gap: 50px; /* 列の間にスペースを追加 */
+    grid-template-columns: 200px 1100px; /* 列の幅を固定 */
+    gap: 30px; /* 列の間にスペースを追加 */
 }
 
-.form {
-    width: 200px;  /* フォームの幅を固定 */
+table{
+    font-size:14px;
 }
-
-.text-images {
-    display: flex; /* 画像を横並びにする */
-    gap: 10px; /* 画像の間隔を調整 */
-}
-
-.text-images img {
-    border-radius: 5px; /* 角丸（任意） */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加（任意） */
-}
-
-th{
+td, th{
     font-size:0.8em;
+    padding:5px;
 }
