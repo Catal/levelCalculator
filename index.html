@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"> <!-- BulmaのCDNリンク -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <title>英語塾レベル到達計算ツール</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <form id="calculationForm">
+                <div class="field">
+                    <label class="label" for="startDate">生徒名</label>
+                    <input class="input" type="text" id="studentName" placeholder="名前を入力">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="startDate">レッスンスタート日:</label>
+                    <input class="input" type="date" id="startDate" required><br><br>
+                </div>
+                
+                <div class="field">
+                    <label class="label" for="startGrade">入塾時の学年:</label>
+                    <div class="control">
+                        <div class="select">
+                            <select id="startGrade" required>
+                                <option value="小3">小学校3年生</option>
+                                <option value="小4">小学校4年生</option>
+                                <option value="小5">小学校5年生</option>
+                                <option value="小6">小学校6年生</option>
+                                <option value="中1">中学校1年生</option>
+                                <option value="中2">中学校2年生</option>
+                                <option value="中3">中学校3年生</option>
+                                <option value="高1">高校1年生</option>
+                                <option value="高2">高校2年生</option>
+                                <option value="高3">高校3年生</option>
+                            </select><br><br>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label" for="startLevel">スタート時のレベル:</label>
+                    <div class="control">
+                        <div class="select">
+                            <select id="startLevel" required>
+                                <option value="Pre1">Pre 1</option>
+                                <option value="Pre2">Pre 2</option>
+                                <option value="Pre3">Pre 3</option>
+                                <option value="Pre4">Pre 4</option>
+                                <option value="BP1">BP 1</option>
+                                <option value="BP2">BP 2</option>
+                                <option value="BP3">BP 3</option>
+                                <option value="BP4">BP 4</option>
+                                <option value="BP5">BP 5</option>
+                                <option value="BP6">BP 6</option>
+                                <option value="BP7">BP 7</option>
+                                <option value="BP8">BP 8</option>
+                                <option value="BP9">BP 9</option>
+                                <option value="BP10">BP 10</option>
+                                <option value="BP11">BP 11</option>
+                                <option value="BP12">BP 12</option>
+                            </select><br><br>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label">ハーフレッスンですか？:</label>
+                        <div class="control">
+                        <label class="radio">
+                            <input type="radio" name="isHalfLesson" value="yes" required> はい
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="isHalfLesson" value="no"> いいえ
+                        </label>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label" for="lessonFrequency">レッスン頻度（週何回）:</label>
+                    <input class="input" type="number" id="lessonFrequency" min="1" max="7" required><br><br>
+                </div>
+
+                <button class="button is-link" type="button" onclick="calculateLevels()">計算する</button>
+            </form>
+            <br>
+            <button class="button is-primary" id="downloadPDF">PDFダウンロードする</button>
+        </div>
+        <div>
+            <table class="table is-bordered" id="levelTable">
+                <h1 class="is-size-2" id="levelUpMessage"></h1>
+                <tr>
+                    <th class="col-narrow">BP</th>
+                    <th class="col-narrow">学年</th>
+                    <th class="col-narrow">スタート日目安</th>
+                    <th class="col-narrow">英検</th>
+                    <th class="col-narrow">TOEFL</th>
+                    <th class="col-narrow">CEFR</th>
+                    <th class="col-narrow">習得語数（累計）</th>
+                    <th>リーディング・リスニング</th>
+                    <th>ライティング</th>
+                    <th>スピーキング</th>
+                </tr>
+                <tr>
+                    <td>Pre 1</td>
+                    <td></td>
+                    <td></td>
+                    <td>ー</td>
+                    <td>ー</td>
+                    <td rowspan="7">A1</td>
+                    <td>100</td>
+                    <td rowspan="4">
+                        <ul>
+                            <li>Oxford Reading Tree シリーズ</li>
+                            <li>Stage 1+: 短いフレーズが繰り返される楽しい絵本を読むことで、読む力を育てる。</li>
+                            <li>Stage 2: 短い文章を理解し、絵と文章を結びつけてストーリーを予想する力を伸ばす。</li>
+                            <li>Stage 3: 長めなストーリーを通じて新しい単語や文法に触れ、イラストを使って意味を推測する力を育てる。</li>
+                            <li>Stage 4: 複雑なストーリーに挑戦することで、読書の楽しさを味わう。</li>
+                        </ul>
+                    </td>
+                    <td rowspan="4">
+                        <ul>
+                            <li>Sounds Great 1: アルファベットの書き方・音を習得する。</li>
+                            <li>Sounds Great 2: 短母音の発音を習得する。</li>
+                            <li>Sounds Great 3 & 4: 長母音や2文字子音の発音を習得する。</li>
+                            <li>Sounds Great 5: 2文字母音の音を習得する。</li>
+                        </ul>
+                    </td>
+                    <td rowspan="4">
+                        Pre Topic Picker: 簡単な質問に答える練習（例: 名前や年齢）をすることで、身近なトピックについて英語で話す基本的なスキルを養う。
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pre 2</td>
+                    <td></td>
+                    <td></td>
+                    <td>ー</td>
+                    <td>ー</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>Pre 3</td>
+                    <td></td>
+                    <td></td>
+                    <td>ー</td>
+                    <td>ー</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>Pre 4</td>
+                    <td></td>
+                    <td></td>
+                    <td>ー</td>
+                    <td>ー</td>
+                    <td>700</td>
+                </tr>
+                <tr>
+                    <td>BP1</td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2">5級</td>
+                    <td>ー</td>
+                    <td>800</td>
+                    <td rowspan="2">I Can Read シリーズ: 挿絵付きで文章量が増えた本を読むことで、読解力をさらに伸ばす。</td>
+                    <td rowspan="2">
+                        <ul>
+                            <li>Grammar Starter 1-3: 基礎的な文法を学ぶことで、正確な文章を書く力を身につける。</li>
+                            <li>Journal: 基本的なフレーズを使ったライティング練習を通じて、文章を書く自信を養う。</li>
+                        </ul>
+                    </td>
+                    <td rowspan="5">BP1-5 Topic Picker: 日常生活に関連するテーマ（例: 学校や趣味）について話すことで、自分の経験や考えを伝えるスキルを伸ばす。</td>
+                </tr>
+                <tr>
+                    <td>BP2</td>
+                    <td></td>
+                    <td></td>
+                    <td>ー</td>
+                    <td>1200</td>
+                </tr>
+                <tr>
+                    <td>BP3</td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2">4級</td>
+                    <td>ー</td>
+                    <td>1600</td>
+                    <td rowspan="2">Black Cat Green Appleシリーズ：カラフルなイラストと短い文章で構成された楽しいストーリーブックを読むことで、読解力を深める。</td>
+                    <td>Summary Worksheet: チャプターごとの重要な部分に焦点を当てた読解問題を解答することで、ストーリーの要点を見つける練習する。</td>
+                </tr>
+                <tr>
+                    <td>BP4</td>
+                    <td></td>
+                    <td></td>
+                    <td>ー</td>
+                    <td rowspan="2">A2</td>
+                    <td>2400</td>
+                    <td rowspan="4">Rewrites Summary: ストーリーブックの内容をまとめるサマリーライティングを通じて、要点を整理し、文章力を高める。</td>
+                </tr>
+                <tr>
+                    <td>BP5</td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2">3級</td>
+                    <td>ー</td>
+                    <td>3300</td>
+                    <td rowspan="8">
+                        <ul>
+                            <li>Black Cat Reading and Training シリーズ：フルカラーの挿し絵があり、幅広いジャンルの物語を読むことで、読解力を高めるとともに、多様なテーマや文化に触れる。</li>
+                            <li>Nonfiction Textbook: エンターテインメント、環境、科学、社会、文化など多様なテーマのリーディングパッセージを読むことで、実用的かつアカデミックな読解力を養う。</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>BP6</td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2">42-71</td>
+                    <td rowspan="2">B1</td>
+                    <td>4100</td>
+                    <td rowspan="7">Academic Topic Picker: 社会問題やアカデミックなテーマについて議論することで、論理的に意見を述べる力とディスカッションスキルを伸ばす。</td>
+                </tr>
+                <tr>
+                    <td>BP7</td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2">準2級</td>
+                    <td>4800</td>
+                </tr>
+                <tr>
+                    <td>BP8</td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2">72-94</td>
+                    <td rowspan="3">B2</td>
+                    <td>5400</td>
+                    <td rowspan="5">Rewrites Topic: 身近なトピックについてのライティングや意見論述の練習に加え、プレゼンテーションを通じて論理的に考えを伝える力を養う。</td>
+                </tr>
+                <tr>
+                    <td>BP9</td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2">2級</td>
+                    <td>6800</td>
+                </tr>
+                <tr>
+                    <td>BP10</td>
+                    <td></td>
+                    <td></td>
+                    <td>7300</td>
+                </tr>
+                <tr>
+                    <td>BP11</td>
+                    <td></td>
+                    <td></td>
+                    <td rowspan="2">準1級</td>
+                    <td rowspan="2">95-120</td>
+                    <td rowspan="2">C1</td>
+                    <td>7500</td>
+                </tr>
+                <tr>
+                    <td>BP12</td>
+                    <td></td>
+                    <td></td>
+                    <td>7700</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+<!--
+        <div class="table">
+            <table class="table is-bordered is-striped" id="levelTable">
+                <h1 class="is-size-2" id="levelUpMessage"></h1>
+                <tr>
+                    <th>レベル</th>
+                    <th>学年</th>
+                    <th>スタート日目安</th>
+                    <th>教材</th>
+                    <th>英検</th>
+                    <th>TOEFL</th>
+                    <th>CEFR</th>
+                    <th>習得語数（累計）</th>
+
+                </tr>
+                <tr>
+                    <td>Pre 1</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Oxford Reading Tree Stage 1+ 📖 💬👂</li>
+                            <li>Sounds Great 1 📖 💬👂✏️</li>
+                            <li>Pre Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>A1</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Pre 2</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Oxford Reading Tree Stage 2 📖 💬👂</li>
+                            <li>Sounds Great 2 📖 💬👂✏️</li>
+                            <li>Pre Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>A1</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>Pre 3</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Oxford Reading Tree Stage 3 📖 💬👂</li>
+                            <li>Sounds Great 3,4 📖 💬👂✏️</li>
+                            <li>Pre Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>A1</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>Pre 4</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Oxford Reading Tree Stage 4 📖 💬👂</li>
+                            <li>Sounds Great 5 📖 💬👂✏️</li>
+                            <li>Pre Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>A1</td>
+                    <td>700</td>
+                </tr>
+                <tr>
+                    <td>BP 1</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Storybook 📖 💬👂</li>
+                            <li>Video Teacher 💬👂</li>
+                            <li>Journal ✏️</li>
+                            <li>Grammar Starter 1-3 ✏️</li>
+                            <li>BP1-5 Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>5級</td>
+                    <td>-</td>
+                    <td>A1</td>
+                    <td>800</td>
+                </tr>
+                <tr>
+                    <td>BP 2</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Storybook 📖 💬👂</li>
+                            <li>Video Teacher 💬👂</li>
+                            <li>Journal ✏️</li>
+                            <li>Grammar Starter 1-3 ✏️</li>
+                            <li>BP1-5 Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>5級</td>
+                    <td>-</td>
+                    <td>A1</td>
+                    <td>1200</td>
+                </tr>
+                <tr>
+                    <td>BP 3</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Storybook 📖 💬👂</li>
+                            <li>Video Teacher 💬👂</li>
+                            <li>Summary Worksheet ✏️</li>
+                            <li>BP1-5 Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>4級</td>
+                    <td>-</td>
+                    <td>A1</td>
+                    <td>1600</td>
+                </tr>
+                <tr>
+                    <td>BP 4</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Storybook 📖 💬👂</li>
+                            <li>Video Teacher 💬👂</li>
+                            <li>Rewrites Summary ✏️</li>
+                            <li>BP1-5 Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>4級</td>
+                    <td>-</td>
+                    <td>A2</td>
+                    <td>2400</td>
+                </tr>
+                <tr>
+                    <td>BP 5</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Storybook or Nonfiction Textbook 📖 💬👂</li>
+                            <li>Video Teacher 💬👂</li>
+                            <li>Rewrites Summary ✏️</li>
+                            <li>BP1-5 Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>3級</td>
+                    <td>-</td>
+                    <td>A2</td>
+                    <td>3300</td>
+                </tr>
+                <tr>
+                    <td>BP 6</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Storybook or Nonfiction Textbook 📖 💬👂</li>
+                            <li>Video Teacher 💬👂</li>
+                            <li>Rewrites Summary ✏️</li>
+                            <li>Academic Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>3級</td>
+                    <td>42-71</td>
+                    <td>B1</td>
+                    <td>4100</td>
+                </tr>
+                <tr>
+                    <td>BP 7</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Storybook or Nonfiction Textbook 📖 💬👂</li>
+                            <li>Video Teacher 💬👂</li>
+                            <li>Rewrites Summary/Topic ✏️</li>
+                            <li>Academic Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>準2級</td>
+                    <td>42-71</td>
+                    <td>B1</td>
+                    <td>4800</td>
+                </tr>
+                <tr>
+                    <td>BP 8</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Storybook or Nonfiction Textbook 📖 💬👂</li>
+                            <li>Video Teacher 💬👂</li>
+                            <li>Rewrites Summary/Topic ✏️</li>
+                            <li>Academic Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>準2級</td>
+                    <td>72-94</td>
+                    <td>B2</td>
+                    <td>5400</td>
+                </tr>
+                <tr>
+                    <td>BP 9</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Storybook or Nonfiction Textbook 📖 💬👂</li>
+                            <li>Rewrites Summary/Topic ✏️</li>
+                            <li>Academic Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>2級</td>
+                    <td>72-94</td>
+                    <td>B2</td>
+                    <td>6800</td>
+                </tr>
+                <tr>
+                    <td>BP 10</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Storybook or Nonfiction Textbook 📖 💬👂</li>
+                            <li>Rewrites Summary/Topic ✏️</li>
+                            <li>Academic Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>2級</td>
+                    <td>72-94</td>
+                    <td>B2</td>
+                    <td>7300</td>
+                </tr>
+                <tr>
+                    <td>BP 11</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Nonfiction Textbook 📖 💬👂</li>
+                            <li>Rewrites Topic ✏️</li>
+                            <li>Academic Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>準1級</td>
+                    <td>95-120</td>
+                    <td>C1</td>
+                    <td>7500</td>
+                </tr>
+                <tr>
+                    <td>BP 12</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>Nonfiction Textbook 📖 💬👂</li>
+                            <li>Rewrites Topic ✏️</li>
+                            <li>Academic Topic Picker 💬👂</li>
+                        </ul>
+                    </td>
+                    <td>準1級</td>
+                    <td>95-120</td>
+                    <td>C1</td>
+                    <td>7700</td>
+                </tr>
+            </table>
+        </div>
+    -->

@@ -1,0 +1,32 @@
+body {
+    padding: 50px; /* 上下左右に20pxの余白を追加 */
+}
+.col-narrow{
+    width:70px;
+}
+.col-wide{
+    width:100px;
+}
+.container {
+    display: grid;
+    grid-template-columns: 200px 1000px; /* 列の幅を固定 */
+    gap: 50px; /* 列の間にスペースを追加 */
+}
+
+.form {
+    width: 200px;  /* フォームの幅を固定 */
+}
+
+.text-images {
+    display: flex; /* 画像を横並びにする */
+    gap: 10px; /* 画像の間隔を調整 */
+}
+
+.text-images img {
+    border-radius: 5px; /* 角丸（任意） */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加（任意） */
+}
+
+th{
+    font-size:0.8em;
+}
