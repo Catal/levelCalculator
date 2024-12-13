@@ -68,7 +68,7 @@ function calculateLevels() {
         let weeksNeeded = Math.ceil(lessonsNeeded / lessonFrequency);
         currentDate.setDate(currentDate.getDate() + weeksNeeded * 7);
 
-        // 学年を更新
+        // 4月1日以降に進級する場合、学年を進める
         currentGrade = updateGrade(currentDate, currentGrade);
 
         // 高3を超えたら表示を停止
@@ -110,7 +110,7 @@ document.getElementById('downloadPDF').addEventListener('click', function () {
     // HTML2PDF.jsのオプション
     const opt = {
         margin:       0.5, // ページ余白を小さめに設定
-        filename:     studentName + '.pdf',  
+        filename:     studentName + 'さんのレベルアップイメージ.pdf',  
         html2canvas:  { scale: 2 }, // 解像度を高く設定
         pagebreak: { avoid: 'table' }, // テーブルの分割を防ぐ
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' } // 横向き
