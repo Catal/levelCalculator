@@ -110,7 +110,7 @@ document.getElementById('downloadPDF').addEventListener('click', function () {
     // HTML2PDF.jsのオプション
     const opt = {
         margin:       0.5, // ページ余白を小さめに設定
-        filename:     'table.pdf',
+        filename:     studentName + '.pdf',  
         html2canvas:  { scale: 2 }, // 解像度を高く設定
         pagebreak: { avoid: 'table' }, // テーブルの分割を防ぐ
         jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' } // 横向き
