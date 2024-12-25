@@ -1,7 +1,7 @@
 function calculateLevels() {
   const studentName = document.getElementById('studentName').value // 生徒名
   const startDate = new Date(document.getElementById('startDate').value) // 入塾日
-  let currentGrade = document.getElementById('startGrade').value // 初期学年
+  const startGrade = document.getElementById('startGrade').value // 初期学年
   const startLevel = document.getElementById('startLevel').value // 開始レベル
   const isHalfLesson =
     document.querySelector('input[name="isHalfLesson"]:checked').value === 'yes'
@@ -31,7 +31,8 @@ function calculateLevels() {
     9, 9, 18, 9, 8, 22, 22, 31, 26, 27, 36, 32, 45, 36, 24, 24
   ] // レベルごとの必要レッスン数
 
-  let currentDate = new Date(startDate) // 現在の日付を初期化
+  let targetDate = new Date(startDate) // 現在の日付を初期化
+  let targetGrade = startGrade
   const startIndex = levels.indexOf(startLevel) // 開始レベルのインデックス
 
   const table = document.getElementById('levelTable')
@@ -61,12 +62,21 @@ function calculateLevels() {
   }
 
   // 学年を更新するための関数
-  function updateGrade(currentDate, currentGrade) {
-    const yearStart = new Date(currentDate.getFullYear(), 3, 1) // 4月1日を基準日
-    if (currentDate >= yearStart) {
-      return getNextGrade(currentGrade)
+  function updateGrade(prevDate, targetDate, targetGrade) {
+    let resultGrade = targetGrade
+
+    // 4月1日以降に進級する場合、学年を進める
+    const yearStart = new Date(targetDate.getFullYear(), 3, 1)
+    if (targetDate >= yearStart) {
+      resultGrade = getNextGrade(resultGrade)
     }
-    return currentGrade
+
+    // 1年以上経過していたら学年を進める
+    const diffYear = (targetDate - prevDate) / (1000 * 60 * 60 * 24 * 365)
+    if (diffYear >= 1) {
+      resultGrade = getNextGrade(resultGrade)
+    }
+    return resultGrade
   }
 
   // 生徒名が入力されていれば、レベルアップイメージを表示
@@ -93,26 +103,29 @@ function calculateLevels() {
 
     // 初回のみ、開始日をそのまま使用
     if (i === startIndex) {
-      row.cells[1].textContent = currentGrade // 学年
-      row.cells[2].textContent = currentDate.toLocaleDateString('ja-JP') // 開始日
+      row.cells[1].textContent = targetGrade // 学年
+      row.cells[2].textContent = targetDate.toLocaleDateString('ja-JP') // 開始日
       continue
     }
 
+    // 前回の日付を保存
+    prevDate = new Date(targetDate)
+
     // 必要な週数を計算し、現在の日付を更新
     let weeksNeeded = Math.ceil(lessonsNeeded / lessonFrequency)
-    currentDate.setDate(currentDate.getDate() + weeksNeeded * 7)
+    targetDate.setDate(targetDate.getDate() + weeksNeeded * 7)
 
     // 4月1日以降に進級する場合、学年を進める
-    currentGrade = updateGrade(currentDate, currentGrade)
+    targetGrade = updateGrade(prevDate, targetDate, targetGrade)
 
     // 高3を超えたら表示を停止
-    if (!currentGrade) {
+    if (!targetGrade) {
       break // ループを終了
     }
 
     // テーブルに情報を表示
-    row.cells[1].textContent = currentGrade // 学年
-    row.cells[2].textContent = currentDate.toLocaleDateString('ja-JP') // 開始日
+    row.cells[1].textContent = targetGrade // 学年
+    row.cells[2].textContent = targetDate.toLocaleDateString('ja-JP') // 開始日
   }
 }
 
