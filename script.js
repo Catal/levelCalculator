@@ -126,6 +126,11 @@ function calculateLevels() {
     // テーブルに情報を表示
     row.cells[1].textContent = targetGrade // 学年
     row.cells[2].textContent = targetDate.toLocaleDateString('ja-JP') // 開始日
+
+    // 高3に到達したらループを終了
+    if (targetGrade === '高3') {
+      break
+    }
   }
 }
 
