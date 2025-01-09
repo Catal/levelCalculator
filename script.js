@@ -55,10 +55,14 @@ function calculateLevels() {
       '中3',
       '高1',
       '高2',
-      '高3'
+      '高3',
+      '大1',
+      '大2',
+      '大3',
+      '大4'
     ]
     const index = gradeOrder.indexOf(grade)
-    return index < gradeOrder.length - 1 ? gradeOrder[index + 1] : null // 高3を超えたら null を返す
+    return index < gradeOrder.length - 1 ? gradeOrder[index + 1] : null // 大4を超えたら null を返す
   }
 
   // 学年を更新するための関数
@@ -118,7 +122,7 @@ function calculateLevels() {
     // 4月1日以降に進級する場合、学年を進める
     targetGrade = updateGrade(prevDate, targetDate, targetGrade)
 
-    // 高3を超えたら表示を停止
+    // 大4を超えたら表示を停止
     if (!targetGrade) {
       break // ループを終了
     }
@@ -127,8 +131,8 @@ function calculateLevels() {
     row.cells[1].textContent = targetGrade // 学年
     row.cells[2].textContent = targetDate.toLocaleDateString('ja-JP') // 開始日
 
-    // 高3に到達したらループを終了
-    if (targetGrade === '高3') {
+    // 大4に到達したらループを終了
+    if (targetGrade === '大4') {
       break
     }
   }
