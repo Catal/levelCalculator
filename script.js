@@ -69,17 +69,26 @@ function calculateLevels() {
   function updateGrade(prevDate, targetDate, targetGrade) {
     let resultGrade = targetGrade
 
-    // 4月1日以降に進級する場合、学年を進める
-    const yearStart = new Date(targetDate.getFullYear(), 3, 1)
-    if (targetDate >= yearStart) {
-      resultGrade = getNextGrade(resultGrade)
+    // 年度切り替えが 4月1日
+    // 月は 0-based なので 3 が4月、日付は 1-based
+    // 例: new Date(year, 3, 1) が4/1
+
+    // 開始年から終了年までループ
+    // 余裕をもって +1年 までチェックしておく
+    for (
+      let y = prevDate.getFullYear();
+      y <= targetDate.getFullYear() + 1;
+      y++
+    ) {
+      // 今年度のカットオフ日時
+      const cutoffDate = new Date(y, 3, 1) // 4月1日
+
+      // カットオフが開始日より後 かつ 終了日以前 or 同日ならカウント
+      if (cutoffDate > prevDate && cutoffDate <= targetDate) {
+        resultGrade = getNextGrade(resultGrade)
+      }
     }
 
-    // 1年以上経過していたら学年を進める
-    const diffYear = (targetDate - prevDate) / (1000 * 60 * 60 * 24 * 365)
-    if (diffYear >= 1) {
-      resultGrade = getNextGrade(resultGrade)
-    }
     return resultGrade
   }
 
