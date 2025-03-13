@@ -10,11 +10,12 @@
     <!-- BulmaのCDNリンク -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
-    <title>英語塾レベル到達計算ツール</title>
+    <title>英語塾キャタル | レベル到達計算ツール</title>
   </head>
   <body>
     <div class="container">
       <div>
+        <img src="logo.png" alt="logo" style="width: 150px; margin-bottom: 20px;" />
         <form id="calculationForm">
           <div class="field">
             <label class="label" for="startDate">生徒名</label>
@@ -112,12 +113,13 @@
             class="button is-link"
             type="button"
             onclick="calculateLevels()"
+            style="background-color: #00A5E3;"
           >
             計算する
           </button>
         </form>
         <br />
-        <button class="button is-primary" id="downloadPDF">
+        <button class="button is-primary" id="downloadPDF"  style="background-color: #E73A77;">
           PDFダウンロードする
         </button>
       </div>
