@@ -28,7 +28,7 @@ function calculateLevels() {
     'BP12'
   ]
   const lessonCounts = [
-    9, 9, 18, 9, 8, 22, 22, 31, 26, 27, 36, 32, 45, 36, 24, 24
+    0, 9, 9, 18, 9, 8, 28, 22, 31, 26, 27, 36, 32, 56, 36, 24, 24
   ] // レベルごとの必要レッスン数
 
   let targetDate = new Date(startDate) // 現在の日付を初期化
@@ -113,11 +113,14 @@ function calculateLevels() {
     if (isHalfLesson && levels[i].startsWith('BP')) {
       lessonsNeeded *= 2 // ハーフレッスンの場合は倍のレッスン数が必要
     }
+    console.log('i', i)
+    console.log('lessonsNeeded', lessonsNeeded)
 
     // 初回のみ、開始日をそのまま使用
     if (i === startIndex) {
       row.cells[1].textContent = targetGrade // 学年
       row.cells[2].textContent = targetDate.toLocaleDateString('ja-JP') // 開始日
+      row.cells[3].textContent = 'ー'
       continue
     }
 
@@ -139,6 +142,7 @@ function calculateLevels() {
     // テーブルに情報を表示
     row.cells[1].textContent = targetGrade // 学年
     row.cells[2].textContent = targetDate.toLocaleDateString('ja-JP') // 開始日
+    row.cells[3].textContent = weeksNeeded + '週'
 
     // 大4に到達したらループを終了
     if (targetGrade === '大4') {
