@@ -190,3 +190,18 @@ document.getElementById('downloadPDF').addEventListener('click', function () {
   // PDF生成
   html2pdf().from(container).set(opt).save()
 })
+
+// ページ読み込み時に今日の日付を入力欄に設定する
+document.addEventListener('DOMContentLoaded', function () {
+  // 今日の日付を取得
+  const today = new Date()
+
+  // YYYY-MM-DD形式にフォーマット（input type="date"の形式）
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+  const formattedDate = `${year}-${month}-${day}`
+
+  // 日付入力欄にデフォルト値として設定
+  document.getElementById('startDate').value = formattedDate
+})
