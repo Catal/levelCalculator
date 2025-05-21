@@ -142,7 +142,7 @@ function calculateLevels() {
     // テーブルに情報を表示
     row.cells[1].textContent = targetGrade // 学年
     row.cells[2].textContent = targetDate.toLocaleDateString('ja-JP') // 開始日
-    row.cells[3].textContent = weeksNeeded + '週'
+    row.cells[3].textContent = weeksNeeded + '週後'
 
     // 大4に到達したらループを終了
     if (targetGrade === '大4') {
