@@ -28,7 +28,7 @@ function calculateLevels() {
     'BP12'
   ]
   const lessonCounts = [
-    0, 9, 9, 18, 9, 8, 28, 22, 31, 26, 27, 36, 32, 56, 36, 24, 24
+    0, 9, 9, 18, 9, 21, 25, 22, 31, 26, 27, 36, 32, 56, 36, 24, 24
   ] // レベルごとの必要レッスン数
 
   let targetDate = new Date(startDate) // 現在の日付を初期化
