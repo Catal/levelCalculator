@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="https://catal.jp/images/favicon/favicon.png" sizes="48x48">
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://catal.jp/images/favicon/favicon.png"
+      sizes="48x48"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
@@ -14,18 +19,27 @@
     <title>英語塾キャタル | レベル到達計算ツール</title>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6VJVVPXPY3"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-6VJVVPXPY3"
+    ></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-6VJVVPXPY3');
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'G-6VJVVPXPY3')
     </script>
   </head>
   <body>
     <div class="container">
       <div>
-        <img src="logo.png" alt="logo" style="width: 150px; margin-bottom: 20px;" />
+        <img
+          src="logo.png"
+          alt="logo"
+          style="width: 150px; margin-bottom: 20px"
+        />
         <form id="calculationForm">
           <div class="field">
             <label class="label" for="startDate">生徒名</label>
@@ -101,7 +115,13 @@
                 はい
               </label>
               <label class="radio">
-                <input type="radio" name="isHalfLesson" value="no" checked="true" /> いいえ
+                <input
+                  type="radio"
+                  name="isHalfLesson"
+                  value="no"
+                  checked="true"
+                />
+                いいえ
               </label>
             </div>
           </div>
@@ -124,13 +144,17 @@
             class="button is-link"
             type="button"
             onclick="calculateLevels()"
-            style="background-color: #00A5E3;"
+            style="background-color: #00a5e3"
           >
             計算する
           </button>
         </form>
         <br />
-        <button class="button is-primary" id="downloadPDF"  style="background-color: #E73A77;">
+        <button
+          class="button is-primary"
+          id="downloadPDF"
+          style="background-color: #e73a77"
+        >
           PDFダウンロードする
         </button>
       </div>
@@ -294,8 +318,16 @@
             <td>ー</td>
             <td>1200</td>
             <td rowspan="1">
-              Black Cat Early Readsシリーズ:
-              豊富なイラストとともに、少しずつ長くなり表現も豊かになる文章を読むことで、ストーリーを英語で理解する力を自然に伸ばす。
+              <ul>
+                <li>
+                  Black Cat Early Readsシリーズ:
+                  豊富なイラストとともに、少しずつ長くなり表現も豊かになる文章を読むことで、ストーリーを英語で理解する力を自然に伸ばす。
+                </li>
+                <li>
+                  ※
+                  BP2には「2」と「2.5」の本が含まれ、少しずつ難易度が上がっていきます。
+                </li>
+              </ul>
             </td>
             <td rowspan="2">
               <ul>
@@ -319,8 +351,16 @@
             <td>ー</td>
             <td>800</td>
             <td rowspan="1">
-              Young Learners Classic Readersシリーズ:
-              たくさんのイラストとシンプルでわかりやすい文章で書かれたストーリーブックを読むことで、英語を読む力の土台を作る。
+              <ul>
+                <li>
+                  Young Learners Classic Readersシリーズ:
+                  たくさんのイラストとシンプルでわかりやすい文章で書かれたストーリーブックを読むことで、英語を読む力の土台を作る。
+                </li>
+                <li>
+                  ※
+                  BP1には「1」と「1.5」の本が含まれ、少しずつ難易度が上がっていきます。
+                </li>
+              </ul>
             </td>
           </tr>
 
@@ -333,46 +373,46 @@
             <td>ー</td>
             <td>700</td>
             <td rowspan="4">
-                <ul>
-                  <li>Oxford Reading Tree シリーズ</li>
-                  <li>
-                    Stage 1+:
-                    短いフレーズが繰り返される楽しい絵本を読むことで、読む力を育てる。
-                  </li>
-                  <li>
-                    Stage 2:
-                    短い文章を理解し、絵と文章を結びつけてストーリーを予想する力を伸ばす。
-                  </li>
-                  <li>
-                    Stage 3:
-                    長めなストーリーを通じて新しい単語や文法に触れ、イラストを使って意味を推測する力を育てる。
-                  </li>
-                  <li>
-                    Stage 4:
-                    複雑なストーリーに挑戦することで、読書の楽しさを味わう。
-                  </li>
-                </ul>
+              <ul>
+                <li>Oxford Reading Tree シリーズ</li>
+                <li>
+                  Stage 1+:
+                  短いフレーズが繰り返される楽しい絵本を読むことで、読む力を育てる。
+                </li>
+                <li>
+                  Stage 2:
+                  短い文章を理解し、絵と文章を結びつけてストーリーを予想する力を伸ばす。
+                </li>
+                <li>
+                  Stage 3:
+                  長めなストーリーを通じて新しい単語や文法に触れ、イラストを使って意味を推測する力を育てる。
+                </li>
+                <li>
+                  Stage 4:
+                  複雑なストーリーに挑戦することで、読書の楽しさを味わう。
+                </li>
+              </ul>
             </td>
             <td rowspan="4">
-                <ul>
-                  <li>Sounds Great 1: アルファベットの書き方・音を習得する。</li>
-                  <li>
-                    Sounds Great 2: 短母音の発音を習得する（例：cat, red, box）
-                  </li>
-                  <li>
-                    Sounds Great 3 & 4:
-                    長母音や2文字子音の発音を習得する（例：cake, bike, clock,
-                    smile）
-                  </li>
-                  <li>
-                    Sounds Great 5: 2文字母音の音を習得する（例：boat, house,
-                    moon）
-                  </li>
-                </ul>
+              <ul>
+                <li>Sounds Great 1: アルファベットの書き方・音を習得する。</li>
+                <li>
+                  Sounds Great 2: 短母音の発音を習得する（例：cat, red, box）
+                </li>
+                <li>
+                  Sounds Great 3 & 4:
+                  長母音や2文字子音の発音を習得する（例：cake, bike, clock,
+                  smile）
+                </li>
+                <li>
+                  Sounds Great 5: 2文字母音の音を習得する（例：boat, house,
+                  moon）
+                </li>
+              </ul>
             </td>
             <td rowspan="4">
-                Pre Topic Picker: 簡単な質問に答える練習（例:
-                名前や年齢）をすることで、身近なトピックについて英語で話す基本的なスキルを養う。
+              Pre Topic Picker: 簡単な質問に答える練習（例:
+              名前や年齢）をすることで、身近なトピックについて英語で話す基本的なスキルを養う。
             </td>
           </tr>
 
@@ -405,7 +445,6 @@
             <td>ー</td>
             <td>100</td>
           </tr>
-
         </table>
       </div>
     </div>
