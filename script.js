@@ -46,6 +46,7 @@ function calculateLevels() {
   // 学年を進めるための関数
   function getNextGrade(grade) {
     const gradeOrder = [
+      '小2',
       '小3',
       '小4',
       '小5',
