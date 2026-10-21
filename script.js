@@ -1,8 +1,11 @@
+// ABOUTME: Calculates level arrival dates from lesson pacing and frequency.
+// ABOUTME: Renders the level schedule and supports PDF export.
 function calculateLevels() {
   const studentName = document.getElementById('studentName').value // 生徒名
   const startDate = new Date(document.getElementById('startDate').value) // 入塾日
   const startGrade = document.getElementById('startGrade').value // 初期学年
   const startLevel = document.getElementById('startLevel').value // 開始レベル
+  const soundsGreatUnits = Number(document.getElementById('soundsGreatUnits').value)
   const isHalfLesson =
     document.querySelector('input[name="isHalfLesson"]:checked').value === 'yes'
   const lessonFrequency = parseInt(
@@ -111,7 +114,11 @@ function calculateLevels() {
     }
 
     let lessonsNeeded = lessonCounts[i]
-    if (isHalfLesson && levels[i].startsWith('BP')) {
+    // 進級までの期間には、進級先ではなく現在のレベルの進め方を適用する。
+    const previousLevel = levels[i - 1]
+    if (previousLevel && previousLevel.startsWith('Pre')) {
+      lessonsNeeded = Math.ceil(lessonsNeeded / soundsGreatUnits)
+    } else if (isHalfLesson && previousLevel && previousLevel.startsWith('BP')) {
       lessonsNeeded *= 2 // ハーフレッスンの場合は倍のレッスン数が必要
     }
     console.log('i', i)

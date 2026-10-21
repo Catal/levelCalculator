@@ -1,3 +1,5 @@
+/* ABOUTME: Styles the calculator form and level milestone table. */
+/* ABOUTME: Aligns lesson format options within the narrow form column. */
 body {
     padding: 50px; /* 上下左右に20pxの余白を追加 */
 }
@@ -19,4 +21,15 @@ table{
 td, th{
     font-size:0.8em;
     padding:5px;
+}
+
+.lesson-format {
+    display: grid;
+    gap: 8px;
+}
+.lesson-format .radio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 0;
 }
