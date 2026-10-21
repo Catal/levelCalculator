@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- ABOUTME: Provides the level arrival calculator form and learning milestones. -->
+<!-- ABOUTME: Offers Sounds Great pacing and lesson format options from BP1 onward. -->
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
@@ -109,11 +111,24 @@
           </div>
 
           <div class="field">
-            <label class="label">ハーフレッスンですか？:</label>
+            <label class="label" for="soundsGreatUnits">Sounds Greatの進め方:</label>
             <div class="control">
+              <div class="select">
+                <select id="soundsGreatUnits">
+                  <option value="1" selected>1 unitずつ</option>
+                  <option value="2">2 unitsずつ</option>
+                </select>
+              </div>
+            </div>
+            <p class="help">PreからBP1に上がるまでの計算に適用します。</p>
+          </div>
+
+          <div class="field">
+            <label class="label">BP1以降のレッスン形式:</label>
+            <div class="control lesson-format">
               <label class="radio">
                 <input type="radio" name="isHalfLesson" value="yes" required />
-                はい
+                ハーフレッスン
               </label>
               <label class="radio">
                 <input
@@ -122,7 +137,7 @@
                   value="no"
                   checked="true"
                 />
-                いいえ
+                フルレッスン
               </label>
             </div>
           </div>
